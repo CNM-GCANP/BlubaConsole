@@ -1,2 +1,0 @@
-# BlubaConsole
-## Instalation
