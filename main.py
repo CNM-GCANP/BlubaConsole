@@ -80,7 +80,7 @@ def main():
                 except FileNotFoundError:
                     time_rn = get_time_rn()
                     print(f"{reset}{dark}[ {normal}{cyan}{time_rn}{reset}{dark} ] ({normal}{red}-{reset}{dark}) {normal}{pretty}File not found")
-        elif command == "view":
+        elif command == "view" or  command == "cat":
             if arg1 != "":
                 with open(arg1, "r") as file:
                     temp = [line.strip() for line in file]
@@ -102,7 +102,17 @@ def main():
                 time_rn = get_time_rn()
                 print(f"{reset}{dark}[ {normal}{cyan}{time_rn}{reset}{dark} ] ({normal}{green}+{reset}{dark}) {normal}{pretty}Cache Cleared!")
             else:
+                print(normal)
                 clear()
+                print(Colorate.Horizontal(Colors.blue_to_purple, """
+                    ██████╗ ██╗     ██╗   ██╗██████╗  █████╗ 
+                    ██╔══██╗██║     ██║   ██║██╔══██╗██╔══██╗
+                    ██████╔╝██║     ██║   ██║██████╔╝███████║
+                    ██╔══██╗██║     ██║   ██║██╔══██╗██╔══██║
+                    ██████╔╝███████╗╚██████╔╝██████╔╝██║  ██║
+                    ╚═════╝ ╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝    
+                    [!] Info         1.0.0         [TM] Bluba
+""", 1))
         elif command == "help":
             help("all")
 
