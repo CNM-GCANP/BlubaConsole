@@ -25,6 +25,9 @@ dark = Style.DIM
 normal = Style.NORMAL
 user = os.getlogin()
 ipset = loadJip()
+bombersubject = loadJbombersubject()
+bomberbody = loadJbomberbody()
+bombervictim = loadJbombervictim()
 def clear():
     system = os.name
     if system == 'nt':
@@ -33,6 +36,9 @@ def clear():
         os.system("clear")
     return
 def main():
+    global bomberbody
+    global bombervictim
+    global bombersubject
     global ipset
     clear()
     print(Colorate.Horizontal(Colors.blue_to_purple, """
@@ -389,6 +395,42 @@ def main():
                                 print(f"{reset}{dark}[ {normal}{cyan}{time_rn}{reset}{dark} ] ({normal}{green}+{reset}{dark}) {normal}{pretty}https://{ipset}/{i} {gray}| {green}{response.status_code}")
                     except KeyboardInterrupt:
                         print(f"{reset}{dark}[ {normal}{cyan}{time_rn}{reset}{dark} ] ({normal}{red}-{reset}{dark}) {normal}{pretty}Interrupt")
+            elif arg1 == "mail":
+                if arg2 == "set":
+                    if arg3 == "subject":
+                        if arg4 != "":
+                            time_rn = get_time_rn()
+                            print(f"{reset}{dark}[ {normal}{cyan}{time_rn}{reset}{dark} ] ({normal}{green}+{reset}{dark}) {normal}{pretty}New Subject: "+arg4+" "+arg5+" "+arg6+" "+arg7+" "+arg8)
+                            setJbombersubject(arg4+" "+arg5+" "+arg6+" "+arg7+" "+arg8)
+                            bombersubject = arg4+" "+arg5+" "+arg6+" "+arg7+" "+arg8
+                    elif arg3 == "body":
+                        if arg4 != "":
+                            time_rn = get_time_rn()
+                            print(f"{reset}{dark}[ {normal}{cyan}{time_rn}{reset}{dark} ] ({normal}{green}+{reset}{dark}) {normal}{pretty}New Body: "+arg4+" "+arg5+" "+arg6+" "+arg7+" "+arg8)
+                            setJbomberbody(arg4+" "+arg5+" "+arg6+" "+arg7+" "+arg8)
+                            bomberbody = arg4+" "+arg5+" "+arg6+" "+arg7+" "+arg8
+                    elif arg3 == "victim":
+                        if arg4 != "":
+                            time_rn = get_time_rn()
+                            print(f"{reset}{dark}[ {normal}{cyan}{time_rn}{reset}{dark} ] ({normal}{green}+{reset}{dark}) {normal}{pretty}New Victim: {arg4}")
+                            setJbombervictim(arg4)
+                            bombervictim = arg4
+                elif arg2 == "see":
+                    print(f"""
+{reset}{dark}╔════[ {normal}{cyan}BlubaEmailBomber{reset}{dark}]
+{reset}{dark}╠═{normal}{pink}Victim: {pretty}{bombervictim}
+{reset}{dark}╠═{normal}{pink}Subject: {pretty}{bombersubject}
+{reset}{dark}╠═{normal}{pink}Body: {pretty}{bomberbody}
+{reset}{dark}╚════[ {normal}{cyan}BlubaEmailBomber{reset}{dark}]
+""")
+                elif arg2 == "spam":
+                    threads = []
+                    for i in range(10):
+                        t = threading.Thread(target=spammail, args=(bombervictim,bombersubject,bomberbody,))
+                        threads.append(t)
+                        t.start()
+                    for t in threads:
+                        t.join()
             else:
                 help("web")
         
