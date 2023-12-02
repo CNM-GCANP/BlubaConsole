@@ -48,7 +48,7 @@ def main():
                     ██╔══██╗██║     ██║   ██║██╔══██╗██╔══██║
                     ██████╔╝███████╗╚██████╔╝██████╔╝██║  ██║
                     ╚═════╝ ╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝    
-                    [!] Info         1.0.0         [TM] Bluba
+                    [!] Info         0.0.1         [TM] Bluba
 """, 1))
     while True:
         time_rn = get_time_rn()
@@ -99,10 +99,16 @@ def main():
         elif command == "clear":
             if arg1 == "cache":
                 ipset = "0.0.0.0"
+                bombersubject = ""
+                bomberbody = ""
+                bombervictim = ""
                 cache = 'Tools/cache.json'
                 with open(cache, 'r') as file:
                     data = json.load(file)
                 data['IP'] = "0.0.0.0"
+                data['BomberSubject'] = ""
+                data['BomberBody'] = ""
+                data['BomberVictim'] = ""
                 with open(cache, 'w') as file:
                     json.dump(data, file, indent=4)
                 time_rn = get_time_rn()
@@ -403,18 +409,30 @@ def main():
                             print(f"{reset}{dark}[ {normal}{cyan}{time_rn}{reset}{dark} ] ({normal}{green}+{reset}{dark}) {normal}{pretty}New Subject: "+arg4+" "+arg5+" "+arg6+" "+arg7+" "+arg8)
                             setJbombersubject(arg4+" "+arg5+" "+arg6+" "+arg7+" "+arg8)
                             bombersubject = arg4+" "+arg5+" "+arg6+" "+arg7+" "+arg8
+                        else:
+                            time_rn = get_time_rn()
+                            print(f"{reset}{dark}[ {normal}{cyan}{time_rn}{reset}{dark} ] ({normal}{red}-{reset}{dark}) {normal}{pretty}Usage: {cyan}web mail set subject <subject>")
                     elif arg3 == "body":
                         if arg4 != "":
                             time_rn = get_time_rn()
                             print(f"{reset}{dark}[ {normal}{cyan}{time_rn}{reset}{dark} ] ({normal}{green}+{reset}{dark}) {normal}{pretty}New Body: "+arg4+" "+arg5+" "+arg6+" "+arg7+" "+arg8)
                             setJbomberbody(arg4+" "+arg5+" "+arg6+" "+arg7+" "+arg8)
                             bomberbody = arg4+" "+arg5+" "+arg6+" "+arg7+" "+arg8
+                        else:
+                            time_rn = get_time_rn()
+                            print(f"{reset}{dark}[ {normal}{cyan}{time_rn}{reset}{dark} ] ({normal}{red}-{reset}{dark}) {normal}{pretty}Usage: {cyan}web mail set body <body>")
                     elif arg3 == "victim":
                         if arg4 != "":
                             time_rn = get_time_rn()
                             print(f"{reset}{dark}[ {normal}{cyan}{time_rn}{reset}{dark} ] ({normal}{green}+{reset}{dark}) {normal}{pretty}New Victim: {arg4}")
                             setJbombervictim(arg4)
                             bombervictim = arg4
+                        else:
+                            time_rn = get_time_rn()
+                            print(f"{reset}{dark}[ {normal}{cyan}{time_rn}{reset}{dark} ] ({normal}{red}-{reset}{dark}) {normal}{pretty}Usage: {cyan}web mail set victim <victim>")
+                    else:
+                        time_rn = get_time_rn()
+                        print(f"{reset}{dark}[ {normal}{cyan}{time_rn}{reset}{dark} ] ({normal}{red}-{reset}{dark}) {normal}{pretty}Usage: {cyan}web mail set <subject/body/victim>")
                 elif arg2 == "see":
                     print(f"""
 {reset}{dark}╔════[ {normal}{cyan}BlubaEmailBomber{reset}{dark}]
@@ -431,6 +449,9 @@ def main():
                         t.start()
                     for t in threads:
                         t.join()
+                else:
+                    time_rn = get_time_rn()
+                    print(f"{reset}{dark}[ {normal}{cyan}{time_rn}{reset}{dark} ] ({normal}{red}-{reset}{dark}) {normal}{pretty}Usage: {cyan}web mail <set/spam>")
             else:
                 help("web")
         
