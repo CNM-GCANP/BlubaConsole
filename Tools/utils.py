@@ -41,13 +41,12 @@ normal = Style.NORMAL
 ct8smtphost = "s1.ct8.pl"
 ct8smtpport = 587
 ct8smtppass = "BlubaMailBomber23:6"
-
+#{reset}{dark}╠═{normal}{pink}Project Github: {pretty}https://github.com/CNM-GCANP/BlubaConsole
 def info():
     print(f"""
 {reset}{dark}╔════[ {normal}{cyan}BlubaConsole{reset}{dark}]
 {reset}{dark}╠═{normal}{pink}Author: {pretty}gigachadaniepizda1
 {reset}{dark}╠═{normal}{pink}Github: {pretty}https://github.com/CNM-GCANP
-{reset}{dark}╠═{normal}{pink}Project Github: {pretty}https://github.com/CNM-GCANP/BlubaConsole
 {reset}{dark}╠═{normal}{pink}BIO: {pretty}https://guns.lol/nyga
 {reset}{dark}╚════[ {normal}{cyan}BlubaConsole {reset}{dark}]
 """)
@@ -63,6 +62,14 @@ def checkip(adres_ip):
         return False
 def help(w):
     if w == "all":
+        print("""
+ls - you know
+cat/view - you know v2
+exit - i think that stupid you aren't
+bat - runs batch scripts
+clear - clears console
+clear cache - clears cache
+    """)
         help("ip")
         help("domain")
         help("web")
@@ -84,11 +91,13 @@ domain whois <domain> - whois domain
         print("""
 web file download <url> <output file> - downloads file from url
 web scan <wordlist> - something like gobuster (uses your cached ip)
+web mail set <subject/body/victim> <arg> - sets information about bomber
+web mail spam - starts email bomber
     """)
     elif w == "discord":
         print("""
 discord webhook send <message> <webhook> - sends message to webhhok
-discord webhook send <message> <webhook> - spams message to webhhok
+discord webhook spam <message> <webhook> - spams message to webhhok
 discord check <webhook> - checks if webhook is valid
 discord delete <webhook> - deletes webhook
     """)
