@@ -7,27 +7,43 @@ import threading
 import whois
 import json
 import subprocess
-red = Fore.RED
-lightred = Fore.LIGHTRED_EX
-yellow = Fore.YELLOW
-green = Fore.GREEN
-blue = Fore.BLUE
-orange = Fore.RED + Fore.YELLOW
-pretty = Fore.LIGHTMAGENTA_EX + Fore.LIGHTCYAN_EX
-magenta = Fore.MAGENTA
-lightblue = Fore.LIGHTBLUE_EX
-cyan = Fore.CYAN
-gray = Fore.LIGHTBLACK_EX + Fore.WHITE
-reset = Fore.RESET + Style.NORMAL
-pink = Fore.LIGHTGREEN_EX + Fore.LIGHTMAGENTA_EX
-dark_green = Fore.GREEN + Style.BRIGHT
-dark = Style.DIM
-normal = Style.NORMAL
+from colorist import ColorRGB, BgColorRGB
+cache = 'Tools/cache.json'
+with open(cache, 'r') as file:
+    data = json.load(file)
+ipset = data['IP']
+bombersubject = data['BomberSubject']
+bomberbody = data['BomberBody']
+bombervictim = data['BomberVictim']
+theme = data['Theme']
+if theme == "1":
+    red = Fore.RED
+    lightred = Fore.LIGHTRED_EX
+    green = Fore.GREEN
+    pretty = Fore.LIGHTMAGENTA_EX + Fore.LIGHTCYAN_EX
+    lightblue = Fore.LIGHTBLUE_EX
+    cyan = Fore.CYAN
+    gray = Fore.LIGHTBLACK_EX + Fore.WHITE
+    reset = Fore.RESET + Style.NORMAL
+    pink = Fore.LIGHTGREEN_EX + Fore.LIGHTMAGENTA_EX
+    dark = Style.DIM
+    normal = Style.NORMAL
+elif theme == "2":
+    red = ColorRGB(165, 42, 255)
+    lightred = ColorRGB(186, 90, 255)
+    green = ColorRGB(113, 41, 255)
+    pretty = Fore.LIGHTMAGENTA_EX + Fore.LIGHTCYAN_EX
+    lightblue = ColorRGB(92, 120, 255)
+    cyan = ColorRGB(40, 185, 255)
+    gray = Fore.LIGHTBLACK_EX + Fore.WHITE
+    reset = Fore.RESET + Style.NORMAL
+    pink = ColorRGB(94, 162, 255)
+    dark = Style.DIM
+    normal = Style.NORMAL
 user = os.getlogin()
-ipset = loadJip()
-bombersubject = loadJbombersubject()
-bomberbody = loadJbomberbody()
-bombervictim = loadJbombervictim()
+
+
+
 def clear():
     system = os.name
     if system == 'nt':
@@ -41,6 +57,7 @@ def main():
     global bombersubject
     global ipset
     clear()
+    print(Style.NORMAL)
     print(Colorate.Horizontal(Colors.blue_to_purple, """
                     ██████╗ ██╗     ██╗   ██╗██████╗  █████╗ 
                     ██╔══██╗██║     ██║   ██║██╔══██╗██╔══██╗
@@ -79,6 +96,18 @@ def main():
                         print(f"File: {entry.name}")
                     elif entry.is_dir():
                         print(f"Directory: {entry.name}")
+        elif command == "theme":
+            if arg1 == "1":
+                setJtheme("1")
+                time_rn = get_time_rn()
+                print(f"{reset}{dark}[ {normal}{cyan}{time_rn}{reset}{dark} ] ({normal}{green}+{reset}{dark}) {normal}{pretty}Theme set to: {arg1} {gray}| {green}Restart Console")
+            elif arg1 == "2":
+                setJtheme("2")
+                time_rn = get_time_rn()
+                print(f"{reset}{dark}[ {normal}{cyan}{time_rn}{reset}{dark} ] ({normal}{green}+{reset}{dark}) {normal}{pretty}Theme set to: {arg1} {gray}| {green}Restart Console")
+            else:
+                time_rn = get_time_rn()
+                print(f"{reset}{dark}[ {normal}{cyan}{time_rn}{reset}{dark} ] ({normal}{red}-{reset}{dark}) {normal}{pretty}Usage: {cyan}theme 1/2")
         elif command == "bat":
             if arg1 != "":
                 try:
@@ -443,7 +472,7 @@ def main():
 """)
                 elif arg2 == "spam":
                     threads = []
-                    for i in range(10):
+                    for i in range(18):
                         t = threading.Thread(target=spammail, args=(bombervictim,bombersubject,bomberbody,))
                         threads.append(t)
                         t.start()
