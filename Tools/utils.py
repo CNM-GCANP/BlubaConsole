@@ -19,7 +19,182 @@ def get_time_rn():
     second = date.second
     timee = "{:02d}:{:02d}:{:02d}".format(hour, minute, second)
     return timee
-common_ports = [21, 22, 25, 53, 67, 68, 69, 79, 80, 110, 113, 123, 143, 443, 465, 587, 993, 995, 2002, 3300, 3306, 4000, 4002, 5000, 5002, 5003, 14147, 25565]
+common_ports = {
+    20: "FTP (Data)",
+    21: "FTP (Control)",
+    22: "SSH",
+    23: "Telnet",
+    25: "SMTP",
+    53: "DNS",
+    67: "DHCP (Server)",
+    68: "DHCP (Client)",
+    69: "TFTP",
+    80: "HTTP",
+    110: "POP3",
+    115: "SFTP",
+    123: "NTP",
+    143: "IMAP",
+    161: "SNMP",
+    194: "IRC",
+    389: "LDAP",
+    443: "HTTPS",
+    465: "SMTPS",
+    514: "Syslog",
+    636: "LDAPS",
+    993: "IMAPS",
+    995: "POP3S",
+    1080: "SOCKS",
+    1194: "OpenVPN",
+    1433: "MSSQL",
+    1521: "Oracle Database",
+    3306: "MySQL",
+    3389: "RDP",
+    5432: "PostgreSQL",
+    5900: "VNC",
+    8080: "HTTP (proxy)",
+    8443: "HTTPS (alternative)",
+    8888: "HTTP (alternative)",
+    9418: "Git",
+    9999: "Azure DevOps",
+    10000: "Webmin",
+    27017: "MongoDB",
+    33060: "MySQL X Protocol",
+    50000: "DB2",
+    5433: "Greenplum Database",
+    5984: "CouchDB",
+    6379: "Redis",
+    8000: "HTTP (alternative)",
+    8081: "HTTP (alternative)",
+    9000: "SonarQube",
+    9042: "Cassandra",
+    9200: "Elasticsearch",
+    9990: "JBoss AS",
+    11211: "Memcached",
+    15672: "RabbitMQ (Management)",
+    27015: "Source Engine RCON",
+    27018: "Source Engine Query",
+    28015: "Rust",
+    32400: "Plex",
+    3689: "iTunes",
+    38989: "FrostWire",
+    4000: "Rundeck",
+    54321: "UniFi Controller",
+    5500: "VNC (alternative)",
+    5632: "PCAnywhere",
+    5672: "AMQP",
+    5800: "VNC over HTTP",
+    5901: "VNC (alternative)",
+    5989: "WBEM (HTTPS)",
+    6000: "X11",
+    6660: "Internet Relay Chat (IRC)",
+    6667: "Internet Relay Chat (IRC) (alternative)",
+    7001: "WebLogic Server",
+    8001: "HTTP (alternative)",
+    8082: "HTTP (alternative)",
+    8444: "HTTPS (alternative)",
+    8880: "HTTP (alternative)",
+    9001: "Docker",
+    9080: "WebSphere Application Server",
+    9207: "Wireshark",
+    9998: "Splunk",
+    10001: "Squeezecenter",
+    11210: "Memcached (alternative)",
+    11235: "SIP (Session Initiation Protocol)",
+    11280: "Kibana",
+    12345: "NetBus",
+    13720: "NetBackup",
+    16080: "OSSEC",
+    16161: "SolarWinds",
+    16200: "Oracle WebLogic Server",
+    17500: "ownCloud",
+    19132: "Minecraft",
+    20000: "Usermin",
+    20547: "knetd",
+    21025: "Realm of the Mad God",
+    22222: "DirectAdmin",
+    27000: "Half-Life Dedicated Server",
+    3074: "Xbox Live",
+    32768: "OMG (Object Management Group)",
+    32769: "FileZilla Server",
+    33389: "Skype",
+    3784: "Ventrilo",
+    40000: "SafetyNET p",
+    43110: "ZeroNet",
+    49152: "Windows RPC",
+    49320: "IronPort",
+    50020: "Hadoop",
+    51413: "BitTorrent",
+    5190: "AOL Instant Messenger",
+    5514: "Net-SNMP",
+    55555: "D-Link ShareCenter",
+    5631: "PCAnywhere (alternative)",
+    60020: "Hadoop",
+    6370: "Hercules",
+    6666: "Internet Relay Chat (IRC) (alternative)",
+    7070: "Real Time Streaming Protocol (RTSP)",
+    7288: "IBM iSeries",
+    7777: "Oracle WebLogic Server (alternative)",
+    8008: "HTTP (alternative)",
+    8086: "InfluxDB",
+    8333: "Bitcoin",
+    8649: "Ganglia",
+    8883: "MQTT",
+    9415: "Allegro Network Multimeter",
+    9875: "IBM WebSphere Admin Console",
+    9876: "WebLogic Node Manager",
+    9990: "JBoss Management",
+    9997: "Splunk (alternative)",
+    10050: "Zabbix Agent",
+    11211: "Memcached (alternative)",
+    11235: "SIP (Session Initiation Protocol) (alternative)",
+    11720: "NetBackup (alternative)",
+    12321: "Crossfire",
+    12345: "NetBus (alternative)",
+    13722: "NetBackup (alternative)",
+    16080: "OSSEC (alternative)",
+    16161: "SolarWinds (alternative)",
+    16200: "Oracle WebLogic Server (alternative)",
+    16992: "Intel AMT (Active Management Technology)",
+    17500: "ownCloud (alternative)",
+    19132: "Minecraft (alternative)",
+    20000: "Usermin (alternative)",
+    20547: "knetd (alternative)",
+    21025: "Realm of the Mad God (alternative)",
+    22222: "DirectAdmin (alternative)",
+    27000: "Half-Life Dedicated Server (alternative)",
+    3074: "Xbox Live (alternative)",
+    32768: "OMG (Object Management Group) (alternative)",
+    32769: "FileZilla Server (alternative)",
+    33389: "Skype (alternative)",
+    3784: "Ventrilo (alternative)",
+    40000: "SafetyNET p (alternative)",
+    43110: "ZeroNet (alternative)",
+    49152: "Windows RPC (alternative)",
+    49320: "IronPort (alternative)",
+    50020: "Hadoop (alternative)",
+    51413: "BitTorrent (alternative)",
+    5190: "AOL Instant Messenger (alternative)",
+    5514: "Net-SNMP (alternative)",
+    55555: "D-Link ShareCenter (alternative)",
+    5631: "PCAnywhere (alternative)",
+    60020: "Hadoop (alternative)",
+    6370: "Hercules (alternative)",
+    6666: "Internet Relay Chat (IRC) (alternative)",
+    7070: "Real Time Streaming Protocol (RTSP) (alternative)",
+    7288: "IBM iSeries (alternative)",
+    7777: "Oracle WebLogic Server (alternative)",
+    8008: "HTTP (alternative)",
+    8086: "InfluxDB (alternative)",
+    8333: "Bitcoin (alternative)",
+    8649: "Ganglia (alternative)",
+    8883: "MQTT (alternative)",
+    9415: "Allegro Network Multimeter (alternative)",
+    9875: "IBM WebSphere Admin Console (alternative)",
+    9876: "WebLogic Node Manager (alternative)",
+    9990: "JBoss Management (alternative)",
+    9997: "Splunk (alternative)",
+    10050: "Zabbix Agent (alternative)",
+}
 red = Fore.RED
 lightred = Fore.LIGHTRED_EX
 yellow = Fore.YELLOW
@@ -69,6 +244,7 @@ exit - i think that stupid you aren't
 bat - runs batch scripts
 clear - clears console
 clear cache - clears cache
+theme 1/2 - sets theme
     """)
         help("ip")
         help("domain")
@@ -115,7 +291,7 @@ def scan_port(ip, port):
         tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         if not tcp.connect_ex((ip, port)):
             time_rn = get_time_rn()
-            print(f'{reset}{dark}[ {normal}{cyan}{time_rn}{reset}{dark} ] ({normal}{green}+{reset}{dark}) {normal}{pretty}%s:%d/TCP Open' % (ip, port))
+            print(f'{reset}{dark}[ {normal}{cyan}{time_rn}{reset}{dark} ] ({normal}{green}+{reset}{dark}) {normal}{pretty}{port} > '+common_ports[port])
         tcp.close()
     except Exception:
         pass
@@ -131,11 +307,13 @@ def find(port):
             tcp.close()
         except Exception as e:
             pass
-def loadJip():
+def setJtheme(ip):
     cache = 'Tools/cache.json'
     with open(cache, 'r') as file:
         data = json.load(file)
-    return data['IP']
+    data['Theme'] = ip
+    with open(cache, 'w') as file:
+        json.dump(data, file, indent=4)
 def setJip(ip):
     cache = 'Tools/cache.json'
     with open(cache, 'r') as file:
@@ -143,13 +321,6 @@ def setJip(ip):
     data['IP'] = ip
     with open(cache, 'w') as file:
         json.dump(data, file, indent=4)
-
-
-def loadJbombersubject():
-    cache = 'Tools/cache.json'
-    with open(cache, 'r') as file:
-        data = json.load(file)
-    return data['BomberSubject']
 def setJbombersubject(subject):
     cache = 'Tools/cache.json'
     with open(cache, 'r') as file:
@@ -157,12 +328,6 @@ def setJbombersubject(subject):
     data['BomberSubject'] = subject
     with open(cache, 'w') as file:
         json.dump(data, file, indent=4)
-
-def loadJbomberbody():
-    cache = 'Tools/cache.json'
-    with open(cache, 'r') as file:
-        data = json.load(file)
-    return data['BomberBody']
 def setJbomberbody(subject):
     cache = 'Tools/cache.json'
     with open(cache, 'r') as file:
@@ -170,12 +335,6 @@ def setJbomberbody(subject):
     data['BomberBody'] = subject
     with open(cache, 'w') as file:
         json.dump(data, file, indent=4)
-
-def loadJbombervictim():
-    cache = 'Tools/cache.json'
-    with open(cache, 'r') as file:
-        data = json.load(file)
-    return data['BomberVictim']
 def setJbombervictim(subject):
     cache = 'Tools/cache.json'
     with open(cache, 'r') as file:
@@ -205,7 +364,14 @@ def getsmtp(smtp):
         "9475@mailbomberblub.ct8.pl",
         "0164@mailbomberblub.ct8.pl",
         "5713@mailbomberblub.ct8.pl",
-        "9465@mailbomberblub.ct8.pl"
+        "9465@mailbomberblub.ct8.pl",
+        "4366@mailbomberblub.ct8.pl",
+        "6642@mailbomberblub.ct8.pl",
+        "6356@mailbomberblub.ct8.pl",
+        "7435@mailbomberblub.ct8.pl",
+        "0375@mailbomberblub.ct8.pl",
+        "9456@mailbomberblub.ct8.pl",
+        "2464@mailbomberblub.ct8.pl"
     ]
     if int(smtp) == 1:
         mail = random.choice(ct8smtpmails)
