@@ -12,6 +12,7 @@ import time
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from colorist import ColorRGB, BgColorRGB
 def get_time_rn():
     date = datetime.datetime.now()
     hour = date.hour
@@ -195,22 +196,34 @@ common_ports = {
     9997: "Splunk (alternative)",
     10050: "Zabbix Agent (alternative)",
 }
-red = Fore.RED
-lightred = Fore.LIGHTRED_EX
-yellow = Fore.YELLOW
-green = Fore.GREEN
-blue = Fore.BLUE
-orange = Fore.RED + Fore.YELLOW
-pretty = Fore.LIGHTMAGENTA_EX + Fore.LIGHTCYAN_EX
-magenta = Fore.MAGENTA
-lightblue = Fore.LIGHTBLUE_EX
-cyan = Fore.CYAN
-gray = Fore.LIGHTBLACK_EX + Fore.WHITE
-reset = Fore.RESET + Style.NORMAL
-pink = Fore.LIGHTGREEN_EX + Fore.LIGHTMAGENTA_EX
-dark_green = Fore.GREEN + Style.BRIGHT
-dark = Style.DIM
-normal = Style.NORMAL
+cache = 'Tools/cache.json'
+with open(cache, 'r') as file:
+    data = json.load(file)
+theme = data['Theme']
+if theme == "1":
+    red = Fore.RED
+    lightred = Fore.LIGHTRED_EX
+    green = Fore.GREEN
+    pretty = Fore.LIGHTMAGENTA_EX + Fore.LIGHTCYAN_EX
+    lightblue = Fore.LIGHTBLUE_EX
+    cyan = Fore.CYAN
+    gray = Fore.LIGHTBLACK_EX + Fore.WHITE
+    reset = Fore.RESET + Style.NORMAL
+    pink = Fore.LIGHTGREEN_EX + Fore.LIGHTMAGENTA_EX
+    dark = Style.DIM
+    normal = Style.NORMAL
+elif theme == "2":
+    red = ColorRGB(165, 42, 255)
+    lightred = ColorRGB(186, 90, 255)
+    green = ColorRGB(113, 41, 255)
+    pretty = Fore.LIGHTMAGENTA_EX + Fore.LIGHTCYAN_EX
+    lightblue = ColorRGB(92, 120, 255)
+    cyan = ColorRGB(40, 185, 255)
+    gray = Fore.LIGHTBLACK_EX + Fore.WHITE
+    reset = Fore.RESET + Style.NORMAL
+    pink = ColorRGB(94, 162, 255)
+    dark = Style.DIM
+    normal = Style.NORMAL
 
 
 ct8smtphost = "s1.ct8.pl"
@@ -384,7 +397,7 @@ def spammail(bombervictim, bombersubject, bomberbody):
                 host = "s1.ct8.pl"
                 smport = 587
                 password = "BlubaMailBomber23:6"
-                frommail = "BlubaBomberONTOP" + str(random.randint(1, 1000)) + "@mailbomberblub.ct8.pl"
+                frommail = "FilipRewaj" + str(random.randint(1, 1000)) + "@mailbomberblub.ct8.pl"
                 mail = getsmtp(smtp)
             message = MIMEMultipart()
             message["From"] = frommail
