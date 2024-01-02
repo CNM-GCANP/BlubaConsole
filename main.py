@@ -22,6 +22,7 @@ if theme == "1":
     green = Fore.GREEN
     pretty = Fore.LIGHTMAGENTA_EX + Fore.LIGHTCYAN_EX
     lightblue = Fore.LIGHTBLUE_EX
+    blue = Fore.BLUE
     cyan = Fore.CYAN
     gray = Fore.LIGHTBLACK_EX + Fore.WHITE
     reset = Fore.RESET + Style.NORMAL
@@ -34,6 +35,7 @@ elif theme == "2":
     green = ColorRGB(113, 41, 255)
     pretty = Fore.LIGHTMAGENTA_EX + Fore.LIGHTCYAN_EX
     lightblue = ColorRGB(92, 120, 255)
+    blue = Fore.BLUE
     cyan = ColorRGB(40, 185, 255)
     gray = Fore.LIGHTBLACK_EX + Fore.WHITE
     reset = Fore.RESET + Style.NORMAL
